@@ -1,4 +1,4 @@
-
+#include <stdio.h>
 
 //exercício 7
 
@@ -200,6 +200,8 @@ int iguaisConsecutivos (char s[]){
 //exercício 16
 
 
+
+
 //exercício 17
 
 int maiorPrefixo (char s1[], char s2[]){
@@ -245,7 +247,13 @@ int maiorSufixo (char s1[], char s2[]){
 //exercício 19
 
 
+
+
+
 //exercício 20
+
+
+
 
 
 //exercício 21
@@ -315,6 +323,476 @@ int palindroma (char s[]) {
   
 //exercício 24
 
+int remRep (char bruh[]){
+  
+  int r = 0, i = 0, j;
+  
+  while (bruh[i] != '\0'){
+    
+    if (bruh[i] == bruh[i+1]){
+      
+      for (j = i; bruh[j]; != '\0'; j++){
+        
+        bruh[j] = bruh[j+1];
+      }
+      i--;
+    }
+    i++;
+  }
+  
+  return i;
+}
+
+//exercício 25
+
+void elimina (char bruh[], int indice){
+  
+  int i;
+  
+  for (i = indice; bruh[i] != '\0'; i++){
+    
+    bruh[i] = bruh[i+1];
+  }
+  
+  bruh[i-1] = '\0';
+}
+
+int limpaEspacos (char texto[]){
+  
+  int r = 0;
+  
+  while (texto[r] != '\0'){
+    
+    if (texto[r] == ' ' && texto[r+1] == ' '){
+      
+      elimina (texto, r);
+      
+      r--;
+    }
+    r++;
+  }
+  return r;
+}
+
+//exercício 26
+
+void insere (int s[], int N, int x){
+  
+  int i = 0, aux = 0;
+  
+  while (i < N){
+    
+    if(x <= s[i]){
+      
+      aux = s[i];
+      
+      s[i] = x;
+      
+      x = aux;
+    }
+    i++;
+  }
+  s[i] = x;
+}
+
+//exercício 27
+
+void merge (int r[], int a[], int b[], int na, int nb){
+  
+  int i = 0, j = 0, h = 0;
+  
+  while (i < na+nb){
+    
+    if (a[j] <= b[h])
+    
+      r[i] = a[j];
+    
+      j++;
+    }
+    else{
+    
+      r[i] = b[h];
+    
+      h++;
+    }
+  
+    if (j == na+1){
+    
+      while (i < na+nb){
+      
+        r[i] = b[h];
+      
+        i++;
+      
+        h++;
+      }
+    }
+  
+    if (h == nb+1){
+    
+      while (i < na+nb){
+      
+        r[i] = a[j];
+      
+        i++;
+      
+        j++;
+      }
+    }
+    i++;
+  }
+}
+
+//exercício 28
+
+int crescente (int a[], int i, int j){
+  
+  int r = 1, k;
+  
+  for (k = i; k < j; k++){
+    
+    if (a[k] > a[k+1]) r = 0;
+  }
+  
+  return r;
+}
+
+//exercício 29
+
+int retiraNeg (int v[], int N){
+  
+  int r = N, i = 0, k;
+  
+  while (i < r){
+    
+    if (v[i] < 0){
+      
+      for (k = i; k < r; k++) v[k] = v[k+1];
+      
+      r--;
+      
+      r--;
+    }
+    
+    i++;
+  }
+  
+  return r;
+}
+
+// exercício 30
+
+int conta_freq (int bruh[], int n, int N){
+    
+  int i, contador = 0;
+    
+  for (i = 0; i < N; i++){
+        
+    if (bruh[i] == n) contador++;
+  }
+    
+  return contador;
+}
+
+
+int menosFreq (int v[], int N){
+  
+  int r = v[0], i, x = conta_freq(v, v[0], N);
+       
+  for (i = 0; i < N; i++){
+           
+    if (conta_freq(v, v[i], N) < x){
+               
+      x = conta_freq(v, v[i], N);
+             
+      r = v[i];
+    } 
+           
+  }
+       
+  return r;
+}
+
+//exercício 31
+
+int maisFreq (int v[], int N){
+       
+  int r = v[0], i, x = conta_freq(v, v[0], N);
+  
+  for (i = 0; i < N; i++){
+           
+    if (conta_freq(v, v[i], N) > x){
+               
+      x = conta_freq(v, v[i], N);
+             
+      r = v[i];
+    } 
+  }
+       
+  return r;
+}
+
+//exercício 32
+
+int conta_cres (int bruh[], int n, int N){
+    
+    int i, contador = 1;
+    
+    for (i = n; i < N; i++){
+        
+        if (bruh[i] > bruh[i+1]){
+            
+            return contador;
+        }
+        else contador++; 
+    }
+    return contador;
+}
+
+
+int maxCresc (int v[], int N) {
+
+  int r = conta_cres(v, 0, N), i;
+
+  for (i = 0; i < N; i++){
+
+    if (conta_cres(v, i, N) > r) r = conta_cres(v, i, N);
+
+  }
+
+  return r;
+}
+
+//exercício 33
+
+
+
+
+
+//exercício 34
+
+int elimina_ord (int bruh[], int n, int N){
+    
+    int i, j, contador = 0;
+    
+    for (i = n+1; i < N; i++){
+        
+        if (bruh[i] > bruh[n]) return (N-contador);
+        
+        if (bruh[n] == bruh[i]){
+            
+            for(j = n; j < N-1; j++){
+                
+                bruh[j] = bruh[j+1];
+            }
+            
+            contador++;
+        }
+    }
+    
+    return (N-contador);
+}
+
+
+int elimRepOrd (int v[], int N) {
+
+  int i, j;
+
+  N = elimina_ord (v, 0, N);
+
+  for (i = 0; i < N; i++){
+
+    for (j = 0; j < N; j++){
+
+      N = elimina_ord (v, j, N);
+
+    }
+
+  }
+
+  return N;
+}
+
+//exercício 35
+
+int elimina_ord (int bruh[], int n, int N){
+    
+    int i, j, contador = 0;
+    
+    for (i = n+1; i < N; i++){
+        
+        if (bruh[i] > bruh[n]) return (N-contador);
+        
+        if (bruh[n] == bruh[i]){
+            
+            for(j = n; j < N-1; j++){
+                
+                bruh[j] = bruh[j+1];
+                
+            }
+            
+            contador++;
+        }
+    }
+    
+    return (N-contador);
+}
+
+int elimRepOrd (int v[], int N) {
+       
+       int i, j;
+       
+       N = elimina_ord (v, 0, N);
+       
+       for (i = 0; i < N; i++){
+           
+           for (j = 0; j < N; j++){
+               
+               N = elimina_ord (v, j, N);
+           }
+       }
+  
+       return N;
+   }
+
+
+int tem_repetido (int v[], int nv){
+
+  int i, r = 0;
+
+  for (i = 0; i < nv; i++){
+
+    if (v[i] == v[i+1]) return r = 1;
+
+  }
+
+  return r; 
+}
+
+
+int comunsOrd (int a[], int na, int b[], int nb){
+       
+  int r, i, contador = 0;
+
+  if (tem_repetido (a, na) == 1) na = elimRepOrd (a, na);
+
+  if (tem_repetido (b, nb) == 1 && a[0] != b[0]) nb = elimRepOrd (b, nb);
+
+  for (r = 0; r < nb; r++){
+
+    for (i = 0; i < na; i++){
+
+      if (b[r] == a[i]) contador++;
+
+    }
+  }
+
+  return contador;
+}
+
+//exercício 36
+
+int comuns (int a[], int na, int b[], int nb){
+
+  int r, i, contador = 0;
+
+  for (r = 0; r < nb; r++){
+
+    for (i = 0; i < na; i++){
+
+      if (a[r] == b[i]){
+
+        contador++; 
+
+        i = na;
+      } 
+
+    }
+  }
+
+  return contador;
+}
+
+//exercício 37
+
+int minInd (int v[], int n) {
+    
+   int r = 0, i, menor = v[0];
+   
+   for (i = 0; i < n; i++){
+       
+       if (v[i] < menor){
+           
+          menor = v[i]; 
+          
+          r = i;
+       } 
+   }
+   
+   return r;
+}
+
+//exercício 38
+
+void somasAc (int v[], int Ac [], int N){
+   
+   int i;
+   
+   for (i = 0; i < N; i++){
+       
+       if (i == 0) Ac[i] = v[i];
+       
+       else Ac[i] = Ac[i-1] + v[i];
+   }
+}
+
+//exercício 39
+
+
+
+
+
+
+//exercício 40
+
+void transposta (int N, float m [N][N]) {
+    
+    int i, j;
+    
+    float aux[N][N];
+    
+    for (i = 0; i < N; i++){
+        
+        for (j = 0; j < N; j++){
+            
+            aux[i][j] = m[j][i];
+            
+        }
+    }
+    
+    for (i = 0; i < N; i++){
+        
+        for (j = 0; j < N; j++){
+            
+            m[i][j] = aux[i][j];
+            
+        }
+    }
+}
+
+//exercício 41
+
+void addTo(int N, int M, int a [N][M], int b[N][M]) {
+    
+    int i, j;
+    
+    for (i = 0; i < N; i++){
+        
+        for (j = 0; j < M; j++) a[i][j] = a[i][j] + b[i][j];
+    }
+}
+
+//exercício 42
 
   
   
