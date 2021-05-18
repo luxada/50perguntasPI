@@ -797,7 +797,118 @@ void addTo(int N, int M, int a [N][M], int b[N][M]) {
   
   
   
-  
+//exercício 55
+
+void insertOrd (LInt *l, int x){
+    
+    LInt node = malloc(sizeof(LInt));
+    
+    LInt atual = (*l);
+    
+    LInt anterior;
+    
+    node->valor = x;
+    
+    node->prox = NULL;
+    
+    if((*l) == NULL){
+        
+        (*l) = node;
+        return;
+    }
+    
+    if(atual->prox == NULL){
+        
+        if(x < atual->valor){
+            
+            (*l) = node;
+            
+            node->prox = atual;
+            
+        } else{
+            
+            atual->prox = node;
+        }
+        
+        return;
+    }
+    
+    anterior = atual;
+    
+    atual = atual->prox;
+    
+    if(anterior->valor > x){
+        
+        (*l) = node;
+        
+        node->prox = anterior;
+        
+        return;
+        
+    } else{
+        
+        while(atual->valor < x){
+            
+            if(atual->prox == NULL){
+                
+                atual->prox = node;
+                return;
+                
+            } else{
+                
+                anterior = anterior->prox;
+                
+                atual = atual->prox;
+            }
+        }
+        
+        anterior->prox = node;
+        
+        node->prox = atual;
+        
+        return;
+        
+    }
+}
+
+//exercício 56
+
+int removeOneOrd (LInt *l, int x){
+    
+    LInt anterior, atual;
+    
+    atual = (*l);
+    
+    if(atual == NULL) return 1;
+    
+    if(atual->valor == x){
+        
+        (*l) = NULL;
+        
+        return 0;
+    }
+    
+    while(atual->prox != NULL){
+        
+        anterior = atual;
+        
+        atual = atual->prox;
+        
+        if(atual->valor == x){
+            
+            anterior->prox = atual->prox;
+            
+            return 0;
+        }
+        
+    }
+    
+    return 1;
+}
+
+//exercício 57
+
+
 
 
 
