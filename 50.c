@@ -1357,3 +1357,168 @@ void splitQS (LInt l, int x, LInt *mx, LInt *Mx){
 
 
 
+//exercício 60
+	
+int removeAll (LInt *l, int x){
+    
+	LInt anterior = newLInt(1, *l), atual = *l, c;
+    
+    	int contador = 0;
+    
+    	*l = anterior;
+    
+    	while(atual != NULL){
+        
+        	if(atual->valor == x){
+            
+            	c = atual;
+            
+            	atual = atual->prox;
+            
+            	anterior->prox = atual;
+            
+            	free(c);
+            
+            	contador++;
+            
+        	} else{
+            
+            		atual = atual->prox;
+            
+            		anterior = anterior->prox;
+        	}
+    	}
+    
+    	c = *l;
+    
+    	*l = c->prox;
+    
+    	free(c);
+    
+    	return contador;
+}	
+	
+//exercício 61
+	
+void removeAux (LInt *l, int x, int *contador){
+    
+	LInt anterior = newLInt(1, *l), atual = *l, c;
+    
+    	*l = anterior;
+    
+    	int primeiro = 0;
+    
+    	while(atual != NULL){
+        
+        	if(atual->valor == x){
+            
+            		if(primeiro == 0) primeiro++;
+            
+                		else{
+                
+                    			c = atual;
+            
+                    			atual = atual->prox;
+            
+                    			anterior->prox = atual;
+                
+                    			free(c);
+            
+                    			(*contador)++;
+            
+                		}
+            	}
+            
+        	atual = atual->prox;
+                
+        	anterior = anterior->prox;
+        
+    	}
+    
+    	c = *l;
+    
+    	*l = c->prox;
+    
+    	free(c);
+}
+
+
+
+
+int removeDups (LInt *l){
+    
+	LInt aux = *l;
+    
+    	int contador = 0;
+    
+    	while(aux != NULL){
+        
+        	removeAux(l, aux->valor, &contador);
+        
+        	aux = aux->prox;
+        
+    	}
+
+    	return contador;
+}	
+	
+//exercício 62
+	
+int encontraMaior(LInt l){
+
+	if(l == NULL) return -1;
+    
+    	int x = l->valor;
+    
+    	while(l != NULL){
+        
+        	if(l->valor > x) x = l->valor;
+        
+        	l = l->prox;
+    	}
+    
+    	return x;
+}
+
+
+int removeMaiorL (LInt *l){
+    
+	LInt aux = *l, c = *l, anterior = newLInt(1, *l);
+    
+    	*l = anterior;
+    
+    	int primeiro = 1, maior = encontraMaior(aux);
+    
+    	while(aux != NULL && primeiro){
+        
+        	if(aux->valor == maior){
+                
+            		c = aux;
+                    
+            		anterior->prox = aux->prox;
+                
+            		aux = aux->prox;
+                
+            		free(c);
+                    
+            		primeiro = 0;
+            
+        	}else{
+        
+            		aux = aux->prox;
+                
+            		anterior = anterior->prox;
+            
+        	}
+    	}
+    
+    	aux = *l;
+    
+    	*l = aux->prox;
+    
+    	free(aux);
+    
+    	return maior;
+}	
+	
+
