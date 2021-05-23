@@ -1609,11 +1609,127 @@ void concatL (LInt *l, LInt b){
     	free(aux);
 }	
 	
+//exercício 66	
+	
+LInt cloneRev (LInt l){
+    
+	LInt auxl = newLInt (0, l);
+	l = auxl;
+	LInt novo = NULL;
+
+	while (auxl->prox != NULL) {
+ 
+		auxl = auxl->prox;
+		novo = newLInt (auxl->valor, novo);
+
+	}
+
+	auxl = l;
+	l = l->prox;
+	free (auxl);
+
+	return novo;
+}
+	
+//exercício 67
 	
 	
+//exercício 68	
 	
+int maximo (LInt l){
+    
+	int max = l->valor;
+    
+    	while(l != NULL){
+        
+        	if(l->valor > max) max = l->valor;
+        	
+        	l = l->prox;
+    	}
+    
+    	return max;
+}
 	
+//exercício 69
+
+int take (int n, LInt *l){
+    
+	LInt aux = *l, anterior = newLInt(0, *l), c, d;
+    
+    	*l = anterior;
+    
+    	int comprimento = 0, bruh = 0;
+    
+    	while(aux != NULL && n > 0){
+            
+            	n--;
+            
+            	anterior = anterior->prox;
+            
+            	aux = aux->prox;
+            
+            	comprimento++;
+    	}
+    
+    
+    	if (n == 0) {
+
+		anterior->prox = NULL;
+
+		while (aux != NULL) {
+		    
+			anterior = aux;
+			
+			aux = aux->prox;
+			
+			free (anterior);
+		}
+	}
+    
+    
+    	aux = *l;
+    
+    	*l = aux->prox;
+    
+    	free(aux);
+   
+    	return comprimento;
+}
 	
+//exercício 70	
+	
+int drop (int n, LInt *l){
+    
+	LInt aux = *l, anterior = newLInt(0, *l), c;
+    
+    	*l = anterior;
+    
+    	int comprimento = 0;
+      
+    	while (aux != NULL && n > 0) {
+		    
+		anterior->prox = aux->prox;
+		
+		c = aux;
+			
+		aux = aux->prox;
+			
+		free (c);
+			
+		n--;
+		
+		comprimento++;
+	}
+
+    
+    	aux = *l;
+    
+    	*l = aux->prox;
+    
+    	free(aux);
+
+    	return comprimento;
+}	
 	
 	
 	
