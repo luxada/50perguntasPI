@@ -1521,4 +1521,100 @@ int removeMaiorL (LInt *l){
     	return maior;
 }	
 	
-
+//exercício 63
+	
+void init (LInt *l){
+    
+	LInt aux = *l, anterior = newLInt(0, *l), c;
+    
+    	*l = anterior;
+    
+    	while(aux->prox != NULL){
+        
+      		aux = aux->prox;
+      
+      		anterior = anterior->prox;
+    	} 
+    
+    	anterior->prox = NULL;
+    
+    	free(aux);
+    
+    	aux = *l;
+    
+	*l = aux->prox;
+	
+	free (aux);
+}
+	
+//exercício 64	
+	
+void appendL (LInt *l, int x){
+    
+	if(*l == NULL){
+        
+        	*l = newLInt(x, NULL);
+        
+        	return;
+    	}
+    
+    	LInt aux = *l, anterior = newLInt(0, *l);
+    
+    	*l = anterior;
+    
+    	while(aux->prox != NULL){
+        
+        	aux = aux->prox;
+        
+        	anterior = anterior->prox;
+    	} 
+    
+    	aux->prox = newLInt(x, NULL);
+    
+    	aux = *l;
+    
+    	*l = aux->prox;
+    
+    	free(aux);
+}	
+	
+//exercício 65	
+	
+void concatL (LInt *l, LInt b){
+    
+	if(*l == NULL){
+        
+        	*l = b;
+        
+        	return;
+    	}
+    
+    	LInt aux = *l, anterior = newLInt(0, *l);
+    
+    	*l = anterior;
+    
+    	while(aux->prox != NULL){
+        
+        	aux = aux->prox;
+        
+        	anterior = anterior->prox;
+    	} 
+    
+    	aux->prox = b;
+    
+    	aux = *l;
+    
+    	*l = aux->prox;
+    
+    	free(aux);
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
